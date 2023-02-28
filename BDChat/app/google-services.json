@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "373957339211",
+    "project_id": "bd-chat-9dd0e",
+    "storage_bucket": "bd-chat-9dd0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373957339211:android:57bb8019bbc281266c85ce",
+        "android_client_info": {
+          "package_name": "com.example.bdchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373957339211-86vt0agt69pkjog5shcs74ltvalmv19a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDspvBRbRx457fUJoBUfhEjIm1xz4mR0Gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373957339211-86vt0agt69pkjog5shcs74ltvalmv19a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
