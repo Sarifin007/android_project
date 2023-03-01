@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.bdchat.Models.User;
 import com.example.bdchat.databinding.ActivitySingInBinding;
 import com.example.bdchat.databinding.ActivitySingUpBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -166,6 +167,14 @@ public class SingInActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Toast.makeText(SingInActivity.this, "Account Created..\n", Toast.LENGTH_SHORT).show();
                             FirebaseUser user=auth.getCurrentUser();
+
+                            User users=new User();
+                            users.setUserId(user.getUid());
+                            users.setUserName(user.getDisplayName());
+                            users.setProfilePic(user.getPhotoUrl().toString());
+                            firebaseDatabase.getReference().child("User").child(user.getUid()).setValue(users);
+
+
                             Intent intent=new Intent(SingInActivity.this,MainActivity.class);
 
                             startActivity(intent);

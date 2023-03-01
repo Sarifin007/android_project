@@ -10,11 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.bdchat.Adapter.FragmentAdapter;
 import com.example.bdchat.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
    ActivityMainBinding mainBinding;
+
    FirebaseAuth auth;
 
 
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         mainBinding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         auth=FirebaseAuth.getInstance();
+
+        mainBinding.viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+        mainBinding.tablayout.setupWithViewPager(mainBinding.viewPager);
     }
 
     @Override
