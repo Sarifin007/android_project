@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -72,6 +73,13 @@ public class SingUpActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+        singUpBinding.textAlreadyhaveaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(SingUpActivity.this,SingInActivity.class);
+                startActivity(intent);
             }
         });
 
