@@ -15,6 +15,7 @@ import com.example.bdchat.Adapter.UserAdapter;
 import com.example.bdchat.Models.User;
 import com.example.bdchat.R;
 import com.example.bdchat.databinding.FragmentChatsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -53,7 +54,13 @@ public class ChatsFragment extends Fragment {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     User user=dataSnapshot.getValue(User.class);
                     user.setUserId(dataSnapshot.getKey());
-                    list.add(user);
+
+
+
+                    if (!user.getUserId().equals(FirebaseAuth.getInstance().getUid())) {
+                        list.add(user);
+
+                    }
 
                 }
                 adapter.notifyDataSetChanged();
