@@ -54,7 +54,7 @@ public class SingUpActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
 
 
-                                User user=new User(singUpBinding.textEmail.getText().toString(),singUpBinding.textUsername.getText().toString(),singUpBinding.textPassword.getText().toString());
+                                User user=new User(singUpBinding.textUsername.getText().toString(), singUpBinding.textEmail.getText().toString(), singUpBinding.textPassword.getText().toString());
                                 String id=task.getResult().getUser().getUid();
                                 datbase.getReference().child("User").child(id).setValue(user);
                                 Toast.makeText(SingUpActivity.this, "Sing Up Successful", Toast.LENGTH_SHORT).show();
