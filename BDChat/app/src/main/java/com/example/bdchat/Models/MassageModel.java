@@ -5,6 +5,9 @@ public class MassageModel {
     String uId, massage,massageId;
     Long timestamp;
 
+
+
+
     public MassageModel(String uId, String massage, Long timestamp) {
         this.uId = uId;
         this.massage = massage;
@@ -15,6 +18,8 @@ public class MassageModel {
         this.uId = uId;
         this.massage = massage;
     }
+
+
     public MassageModel(){
 
     }
