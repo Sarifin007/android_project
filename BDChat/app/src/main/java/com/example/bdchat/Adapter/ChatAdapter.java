@@ -1,6 +1,8 @@
 package com.example.bdchat.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bdchat.Models.MassageModel;
 import com.example.bdchat.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatAdapter extends RecyclerView.Adapter {
 
@@ -63,12 +68,52 @@ public class ChatAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MassageModel massageModel=massageModels.get(position);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                new AlertDialog.Builder(context)
+                        .setTitle("Delete ?")
+                        .setMessage("Ary you sure you want to delete this massage")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FirebaseDatabase database=FirebaseDatabase.getInstance();
+                                String senderRoom=FirebaseAuth.getInstance().getUid() + recId;
+                                database.getReference().child("chats").child(senderRoom)
+                                        .child(massageModel.getMassageId())
+                                        .setValue(null);
+
+
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        }).show();
+                return false;
+            }
+        });
+
         if (holder.getClass() == SenderViewHolder.class)
         {
-            ((SenderViewHolder)holder).senderMsg.setText(massageModel.getMassage());
+
+            Date date=new Date(massageModel.getTimestamp());
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat(" h:mm:a");
+            String strDate=simpleDateFormat.format(date);
+            ((SenderViewHolder)holder).senderTime.setText(strDate.toString());
+
+
         }
         else {
             ((RecieverViewHolder)holder).receiverMsg.setText(massageModel.getMassage());
+            Date date=new Date(massageModel.getTimestamp());
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat(" h:mm:a");
+            String strDate=simpleDateFormat.format(date);
+            ((RecieverViewHolder)holder).receiverTime.setText(strDate.toString());
+
         }
 
     }

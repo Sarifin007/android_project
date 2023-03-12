@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.groupChat:
+                Intent intent1=new Intent(MainActivity.this,GroupChatActivity.class);
+                startActivity(intent1);
+                break;
 
             case R.id.logout:
                 auth.signOut();
